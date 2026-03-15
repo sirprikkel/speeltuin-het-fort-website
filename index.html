@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Speeltuin Het Fort — Populaire speeltuin in Oss met klimtoestellen, schommels en waterspel. 4.6 sterren op Google. 24 uur geopend, gratis toegang.">
+  <title>Speeltuin Het Fort — Oss</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fort: '#B45309',
+            'fort-dark': '#92400E',
+            'fort-light': '#D97706',
+            stone: '#78716C',
+            sky: '#0EA5E9',
+            'sky-light': '#7DD3FC',
+            grass: '#16A34A',
+            warm: '#FEF3C7',
+            sand: '#FFFBEB',
+            dark: '#1C1917',
+          },
+          fontFamily: {
+            serif: ['Lora', 'serif'],
+            sans: ['Raleway', 'sans-serif'],
+          },
+          borderRadius: {
+            'organic': '24px',
+            'organic-sm': '16px',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script defer src="https://analytics.code-lieshout.nl/prikkel" data-website-id="38b5c8bf-f191-46ca-8d46-11d6e9b9aa1f"></script>
+  <style>
+    body { font-family: 'Raleway', sans-serif; }
+    h1, h2, h3 { font-family: 'Lora', serif; }
+    .hero-overlay {
+      background: linear-gradient(180deg, rgba(180,83,9,0.15) 0%, rgba(28,25,23,0.75) 100%);
+    }
+    .photo-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .photo-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(180,83,9,0.15);
+    }
+    .feature-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(180,83,9,0.1);
+    }
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92); z-index: 100;
+      justify-content: center; align-items: center; cursor: pointer;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 16px; object-fit: contain; }
+  </style>
+</head>
+<body class="bg-sand text-dark">
+
+  <!-- Navbar -->
+  <nav class="bg-white/90 backdrop-blur-sm shadow-sm fixed w-full top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-3 cursor-pointer">
+          <div class="w-10 h-10 bg-fort rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <span class="font-serif font-semibold text-fort text-lg">Het Fort</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#over" class="text-dark/70 hover:text-fort cursor-pointer transition-colors duration-200">Over</a>
+          <a href="#fotos" class="text-dark/70 hover:text-fort cursor-pointer transition-colors duration-200">Foto's</a>
+          <a href="#reviews" class="text-dark/70 hover:text-fort cursor-pointer transition-colors duration-200">Reviews</a>
+          <a href="#bezoek" class="bg-fort text-white px-5 py-2.5 rounded-organic-sm font-medium cursor-pointer hover:bg-fort-dark transition-colors duration-200">Route</a>
+        </div>
+        <button id="menuBtn" class="md:hidden p-2 cursor-pointer" aria-label="Menu openen">
+          <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-4 space-y-3">
+        <a href="#over" class="block text-dark/70 cursor-pointer">Over</a>
+        <a href="#fotos" class="block text-dark/70 cursor-pointer">Foto's</a>
+        <a href="#reviews" class="block text-dark/70 cursor-pointer">Reviews</a>
+        <a href="#bezoek" class="block bg-fort text-white px-5 py-2.5 rounded-organic-sm font-medium text-center cursor-pointer">Route</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative min-h-[80vh] flex items-center pt-16">
+    <div class="absolute inset-0">
+      <img src="images/google_place_1.jpg" alt="Speeltuin Het Fort in Oss" class="w-full h-full object-cover">
+      <div class="hero-overlay absolute inset-0"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-20">
+      <div class="max-w-2xl">
+        <span class="inline-block bg-fort/30 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-sm font-medium mb-6">Speeltuin · Oss</span>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          Speeltuin Het Fort
+        </h1>
+        <p class="text-white/90 text-lg md:text-xl mb-8 leading-relaxed">
+          Uitgebreide speeltuin met klimtoestellen, schommels en waterspel. De kids rennen er heerlijk rond. 24 uur geopend, gratis toegang.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="https://maps.google.com/?q=Speeltuin+Het+Fort+Oss" target="_blank" rel="noopener" class="bg-fort hover:bg-fort-dark text-white font-semibold px-8 py-3.5 rounded-organic-sm text-center cursor-pointer transition-colors duration-200 inline-flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Route plannen
+          </a>
+          <a href="#fotos" class="border-2 border-white text-white hover:bg-white hover:text-fort font-semibold px-8 py-3.5 rounded-organic-sm text-center cursor-pointer transition-colors duration-200">
+            Bekijk foto's
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="bg-fort text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-serif font-bold text-warm">4.6</div>
+          <div class="text-white/70 text-sm mt-1">Google rating ⭐</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-serif font-bold text-warm">74</div>
+          <div class="text-white/70 text-sm mt-1">Reviews</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-serif font-bold text-warm">24/7</div>
+          <div class="text-white/70 text-sm mt-1">Altijd geopend</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-serif font-bold text-warm">Gratis</div>
+          <div class="text-white/70 text-sm mt-1">Vrij toegankelijk</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Over -->
+  <section id="over" class="py-20 bg-sand">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-fort mb-6">Over de speeltuin</h2>
+          <p class="text-dark/70 leading-relaxed mb-4">
+            Speeltuin Het Fort is een uitgebreide speeltuin in Oss met veel variatie in speelmogelijkheden. Er zijn baby schommels, gewone schommels, leuke klimtoestellen, een kabelbaan en waterspel.
+          </p>
+          <p class="text-dark/70 leading-relaxed mb-4">
+            Voor de ouders zijn er bankjes om op te zitten terwijl de kinderen spelen. De speeltuin is geschikt voor kinderen van alle leeftijden.
+          </p>
+          <div class="grid grid-cols-2 gap-4 mt-8">
+            <div class="feature-card bg-white rounded-organic-sm p-5 shadow-sm text-center">
+              <svg class="w-8 h-8 text-fort mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <h3 class="font-serif font-semibold text-sm">Klimtoestellen</h3>
+            </div>
+            <div class="feature-card bg-white rounded-organic-sm p-5 shadow-sm text-center">
+              <svg class="w-8 h-8 text-sky mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+              <h3 class="font-serif font-semibold text-sm">Waterspel</h3>
+            </div>
+            <div class="feature-card bg-white rounded-organic-sm p-5 shadow-sm text-center">
+              <svg class="w-8 h-8 text-grass mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <h3 class="font-serif font-semibold text-sm">Kabelbaan</h3>
+            </div>
+            <div class="feature-card bg-white rounded-organic-sm p-5 shadow-sm text-center">
+              <svg class="w-8 h-8 text-fort-light mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <h3 class="font-serif font-semibold text-sm">Schommels</h3>
+            </div>
+          </div>
+        </div>
+        <div>
+          <img src="images/google_place_2.jpg" alt="Klimtoestellen Speeltuin Het Fort" class="rounded-organic shadow-lg w-full" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Foto's -->
+  <section id="fotos" class="py-20 bg-warm">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-fort mb-4">Het Fort in beeld</h2>
+        <p class="text-dark/60">Foto's van bezoekers via Google Maps</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="photo-card rounded-organic overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox(this)">
+          <img src="images/google_place_1.jpg" alt="Speeltuin overzicht" class="w-full h-48 md:h-64 object-cover" loading="lazy">
+        </div>
+        <div class="photo-card rounded-organic overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox(this)">
+          <img src="images/google_place_2.jpg" alt="Klimtoestellen" class="w-full h-48 md:h-64 object-cover" loading="lazy">
+        </div>
+        <div class="photo-card rounded-organic overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox(this)">
+          <img src="images/google_place_3.jpg" alt="Speeltoestellen" class="w-full h-48 md:h-64 object-cover" loading="lazy">
+        </div>
+        <div class="photo-card rounded-organic overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox(this)">
+          <img src="images/google_place_4.jpg" alt="Kinderen spelen" class="w-full h-48 md:h-64 object-cover" loading="lazy">
+        </div>
+        <div class="photo-card rounded-organic overflow-hidden shadow-sm cursor-pointer md:col-span-2" onclick="openLightbox(this)">
+          <img src="images/google_place_5.jpg" alt="Het Fort speeltuin Oss" class="w-full h-48 md:h-64 object-cover" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="py-20 bg-sand">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-fort mb-2">Wat bezoekers zeggen</h2>
+        <div class="flex items-center justify-center gap-2 mt-2">
+          <span class="text-2xl font-serif font-bold text-fort">4.6</span>
+          <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
+          <span class="text-dark/50 text-sm">74 reviews op Google</span>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-organic-sm p-6 shadow-sm">
+          <div class="text-yellow-500 mb-2">⭐⭐⭐⭐⭐</div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-3">"De kids hebben er weer heerlijk rond gerend en gek gedaan. Ze speelt er graag"</p>
+          <p class="text-dark/50 text-xs font-medium">— Tim Hoornweg</p>
+        </div>
+        <div class="bg-white rounded-organic-sm p-6 shadow-sm">
+          <div class="text-yellow-500 mb-2">⭐⭐⭐⭐⭐</div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-3">"Erg leuke speeltuin, veel leuke kleine kinderen aan het spelen en voor de ouders bankjes om op te zitten"</p>
+          <p class="text-dark/50 text-xs font-medium">— Lot Jansen</p>
+        </div>
+        <div class="bg-white rounded-organic-sm p-6 shadow-sm">
+          <div class="text-yellow-500 mb-2">⭐⭐⭐⭐</div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-3">"Uitgebreide speeltuin, met baby schommel, veel gewone schommels, leuke klimtoestellen"</p>
+          <p class="text-dark/50 text-xs font-medium">— Carien Grotenhuis</p>
+        </div>
+        <div class="bg-white rounded-organic-sm p-6 shadow-sm">
+          <div class="text-yellow-500 mb-2">⭐⭐⭐⭐</div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-3">"Leuke parkje, voor elk kind wel wat"</p>
+          <p class="text-dark/50 text-xs font-medium">— Fatma Kurt</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bezoek -->
+  <section id="bezoek" class="py-20 bg-fort text-white">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">Kom langs</h2>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <svg class="w-6 h-6 text-warm flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <div>
+                <h3 class="font-semibold">Locatie</h3>
+                <p class="text-white/80">Oss (nabij De Horzak)</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <svg class="w-6 h-6 text-warm flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div>
+                <h3 class="font-semibold">Openingstijden</h3>
+                <p class="text-white/80">24 uur geopend, 7 dagen per week</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <svg class="w-6 h-6 text-warm flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div>
+                <h3 class="font-semibold">Toegang</h3>
+                <p class="text-white/80">Gratis — vrij toegankelijk</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Speeltuin+Het+Fort+Oss" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white text-fort font-semibold px-8 py-3.5 rounded-organic-sm mt-8 cursor-pointer hover:bg-warm transition-colors duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            Open in Google Maps
+          </a>
+        </div>
+        <div class="rounded-organic overflow-hidden shadow-lg">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2477!2d5.52!3d51.79!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6fdd300915271%3A0xef2b5d9800163426!2sSpeeltuin+Het+Fort!5e0!3m2!1snl!2snl!4v1"
+            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Locatie Speeltuin Het Fort"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white/60 py-12">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="text-center">
+        <h3 class="font-serif text-white font-semibold text-lg mb-2">Speeltuin Het Fort</h3>
+        <p class="text-white/50 mb-6">Oss · 24/7 geopend · Gratis toegang</p>
+        <p class="text-white/30 text-sm">Gebouwd door <a href="https://www.code-lieshout.nl" class="text-fort-light hover:text-white cursor-pointer transition-colors duration-200">Code Lieshout</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="Vergroot">
+  </div>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightboxImg').alt = img.alt;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); document.getElementById('mobileMenu').classList.add('hidden'); }
+      });
+    });
+  </script>
+</body>
+</html>
